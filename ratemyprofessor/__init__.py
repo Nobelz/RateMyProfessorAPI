@@ -92,15 +92,15 @@ def get_professors_by_school_and_name(college: School, professor_name: str):
     """
     professor_name.replace(' ', '+')
     url = f"https://www.ratemyprofessors.com/search.jsp?queryoption=HEADER&queryBy=teacherName" \
-          f"&schoolName={college.school_name}" \
-          f"&schoolID={college.school_id}&query={professor_name}"
+          f"&schoolName={college.name}" \
+          f"&schoolID={college.id}&query={professor_name}"
     page = requests.get(url)
-    data = re.findall(r'/ShowRatings\.jsp\?sid=(\d+)', page.text)
+    data = re.findall(r'/ShowRatings\.jsp\?tid=(\d+)', page.text)
     professor_list = []
 
     for professor_data in data:
         try:
-            professor_list.append(Professor(int(professor_data)))
+            professor_list.append(Professor(college, int(professor_data)))
         except ValueError:
             pass
 

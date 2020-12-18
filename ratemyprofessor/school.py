@@ -12,11 +12,11 @@ class School:
         :param school_id: The school's id.
         """
 
-        self.school_id = school_id
-        self.school_name = self._get_name()
+        self.id = school_id
+        self.name = self._get_name()
 
     def _get_name(self):
-        url = f'https://www.ratemyprofessors.com/campusRatings.jsp?sid={self.school_id}'
+        url = f'https://www.ratemyprofessors.com/campusRatings.jsp?sid={self.id}'
         page = requests.get(url)
         school_names = re.findall(r"schoolName: '(.*?)'", page.text)
 

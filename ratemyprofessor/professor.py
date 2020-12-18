@@ -16,6 +16,7 @@ class Professor:
         """
 
         self.school: School = school
+        self.id = professor_id
         self._get_rating_info(professor_id)
 
     def _get_rating_info(self, professor_id: int):
@@ -25,8 +26,9 @@ class Professor:
 
         # Name
         try:
-            names = (html.xpath('//*[@id="root"]/div/div/div[3]/div[1]/div[1]/div[2]/div[1]/span/text()'))[0]
-            self.name: str = names[0] + ' ' + names[1]
+            first_name = (html.xpath('//*[@id="root"]/div/div/div[3]/div[1]/div[1]/div[2]/div[1]/span[1]/text()'))[0]
+            last_name = (html.xpath('//*[@id="root"]/div/div/div[3]/div[1]/div[1]/div[2]/div[1]/span[2]/text()'))[0]
+            self.name: str = first_name + ' ' + last_name
         except (ValueError, IndexError):
             self.name = None
 

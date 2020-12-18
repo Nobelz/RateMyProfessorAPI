@@ -8,5 +8,5 @@ An extremely basic wrapper for the RateMyProfessorAPI.
 :license: Apache 2.0, see LICENSE for more details.
 """
 
-from .professor import *
-from .school import *
+from .professor import Professor
+from .school import School

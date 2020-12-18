@@ -26,7 +26,7 @@ python -m pip uninstall RateMyProfessorAPI
 ```
 
 ## Usage
-As of version 0.0.1, there are limited ways to retrieve professor ratings. 
+As of version 1.0.0, there are limited ways to retrieve professor ratings. 
 Only ratings, difficulty ratings, and names can be displayed at this time.
 
 To retrieve a list of professors, you have to first specify the school:

@@ -1,8 +1,8 @@
 """
 ratemyprofessor
 
-RateMyProfessor API Wrapper
-An extremely basic wrapper for the RateMyProfessorAPI.
+RateMyProfessor API
+An extremely basic web scraper for the RateMyProfessor website.
 
 :copyright: (c) 2020 Nobelz
 :license: Apache 2.0, see LICENSE for more details.

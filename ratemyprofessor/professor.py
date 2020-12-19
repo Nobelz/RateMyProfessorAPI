@@ -23,7 +23,6 @@ class Professor:
         url = f"https://www.ratemyprofessors.com/ShowRatings.jsp?tid={professor_id}"
         page = requests.get(url)
         html = etree.HTML(page.text)
-        print
 
         # Name
         try:

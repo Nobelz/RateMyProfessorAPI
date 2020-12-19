@@ -23,6 +23,7 @@ class Professor:
         url = f"https://www.ratemyprofessors.com/ShowRatings.jsp?tid={professor_id}"
         page = requests.get(url)
         html = etree.HTML(page.text)
+        print
 
         # Name
         try:
@@ -39,9 +40,33 @@ class Professor:
         except (ValueError, IndexError):
             self.rating = None
 
-        # Difficulty Rating
+        # % Would Take Again and Difficulty Rating
         try:
-            diff = (html.xpath('//*[@id="root"]/div/div/div[3]/div[1]/div[1]/div[3]/div[2]/div[1]/text()'))[0]
-            self.difficulty: float = float(diff)
+            diff = (html.xpath('//*[@id="root"]/div/div/div[3]/div[1]/div[1]/div[3]/div/div[1]/text()'))
+            if len(diff) == 2:
+                self.difficulty: float = float(diff[1])
+                self.would_take_again: int = int(diff[0])
+            elif len(diff) == 1:
+                self.difficulty: float = float(diff[0])
+                self.would_take_again = None
+            else:
+                self.difficulty = None
+                self.would_take_again = None
         except (ValueError, IndexError):
             self.difficulty = None
+            self.would_take_again = None
+
+        # Number of Ratings
+        try:
+            num_ratings = (html.xpath('//*[@id="root"]/div/div/div[3]/div[1]/div[1]/div[1]/div[2]/div/a/text()'))[0]
+            self.num_ratings: int = int(num_ratings)
+        except (ValueError, IndexError):
+            self.num_ratings = 0
+
+        # Department
+        try:
+            department = (html.xpath('//*[@id="root"]/div/div/div[3]/div[1]/div[1]/div[2]/div[2]/span/b/text()'))[0]
+            self.department: str = str(department)
+        except (ValueError, IndexError):
+            self.department = None
+

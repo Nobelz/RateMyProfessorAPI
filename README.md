@@ -51,9 +51,10 @@ ratemyprofessor.get_professor_by_schools_and_name(school, "Professor Name")
 ```
 This will return a list of `Professor`s.
 
-Each `Professor` object has a `rating`, `difficulty`, `id`, and `name`.
+Each `Professor` object has a `rating`, `difficulty`, `id`, `name`, `department`, and `would_take_again`.
+Note that some of these will be `None`, like `would_take_again`.
 
-Each `School` object has a 'id' and 'name'.
+Each `School` object has a `id` and `name`.
 
 ## Example
 ```python
@@ -61,16 +62,24 @@ import ratemyprofessor
 
 professor = ratemyprofessor.get_professor_by_school_and_name(
     ratemyprofessor.get_school_by_name("Case Western Reserve University"), "Connamacher")
-print(f"Professor name: {professor.name}")
-print(f"Professor rating: {professor.rating} / 5.0")
-print(f"Professor difficulty: {professor.difficulty} / 5.0")
+if professor is not None:
+    print(f"Name: {professor.name}")
+    print(f"Department: {professor.department}")
+    print(f"Rating: {professor.rating} / 5.0")
+    print(f"Difficulty: {professor.difficulty} / 5.0")
+    if professor.would_take_again is not None:
+        print(f"Would Take Again: {professor.would_take_again} %")
+    else:
+        print(f"Would Take Again: N/A")
 ```
 
 **Output:**
 ```
-Professor name: Harold Connamacher
-Professor rating: 4.7 / 5.0
-Professor difficulty: 3.8 / 5.0
+Name: Harold Connamacher
+Department: Computer Science
+Rating: 4.7 / 5.0
+Difficulty: None / 5.0
+Would Take Again: N/A
 ```
 See `examples` for more examples.
 

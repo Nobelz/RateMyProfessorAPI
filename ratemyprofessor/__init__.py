@@ -9,10 +9,15 @@ An extremely basic web scraper for the RateMyProfessor website.
 """
 import requests
 import re
+import json
+import os
 
-from lxml import etree
 from .professor import Professor
 from .school import School
+
+
+with open(os.path.join(os.path.dirname(__file__), "json/header.json"), 'r') as f:
+    headers = json.load(f)
 
 
 def get_school_by_name(school_name: str):
@@ -63,18 +68,22 @@ def get_professor_by_school_and_name(college: School, professor_name: str):
     Gets a Professor with the specified School and professor name.
 
     This only returns 1 professor, so make sure that the name is specific.
+    This returns the professor with the most ratings.
     For instance, searching "Smith" using the School of Case Western Reserve University will return 5 results,
-    but only the first result will be returned.
+    but only one result will be returned.
 
     :param college: The professor's school.
     :param professor_name: The professor's name.
     :return: The professor that matches the school and name. If no professors are found, this will return None.
     """
     professors = get_professors_by_school_and_name(college, professor_name)
-    if professors:
-        return professors[0]
-    else:
-        return None
+    max_professor = None
+
+    for prof in professors:
+        if max_professor is None or max_professor.num_ratings < prof.num_ratings:
+            max_professor = prof
+
+    return max_professor
 
 
 def get_professors_by_school_and_name(college: School, professor_name: str):
@@ -100,7 +109,7 @@ def get_professors_by_school_and_name(college: School, professor_name: str):
 
     for professor_data in data:
         try:
-            professor_list.append(Professor(college, int(professor_data)))
+            professor_list.append(Professor(int(professor_data)))
         except ValueError:
             pass
 

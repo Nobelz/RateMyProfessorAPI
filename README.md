@@ -63,27 +63,28 @@ import ratemyprofessor
 professor = ratemyprofessor.get_professor_by_school_and_name(
     ratemyprofessor.get_school_by_name("Case Western Reserve University"), "Connamacher")
 if professor is not None:
-    print(f"Name: {professor.name}")
-    print(f"Department: {professor.department}")
+    print(f"{professor.name} works in the {professor.department} Department of {professor.school.name}.")
     print(f"Rating: {professor.rating} / 5.0")
     print(f"Difficulty: {professor.difficulty} / 5.0")
+    print(f"Total Ratings: {professor.num_ratings}")
     if professor.would_take_again is not None:
-        print(f"Would Take Again: {professor.would_take_again} %")
+        print(f"Would Take Again: {round(professor.would_take_again, 1)}%")
     else:
-        print(f"Would Take Again: N/A")
+        print("Would Take Again: N/A")
+
 ```
 
 **Output:**
 ```
-Name: Harold Connamacher
-Department: Computer Science
+Harold Connamacher works in the Computer Science Department of Case Western Reserve University.
 Rating: 4.7 / 5.0
-Difficulty: None / 5.0
-Would Take Again: N/A
+Difficulty: 3.8 / 5.0
+Total Ratings: 102
+Would Take Again: 86.2%
 ```
 See `examples` for more examples.
 
 ## Acknowledgements and License
 This can be seen as a continuation of the [RateMyProfessorPyAPI](https://pypi.org/project/RateMyProfessorPyAPI/) project that can also be found on GitHub [here](https://github.com/remiliacn/RateMyProfessorPy).
-A lot of the code is reused in this package.
-As such, this project is also licensed under the [Apache 2.0 License](http://www.apache.org/licenses/LICENSE-2.0). See LICENSE for more details.
+This serves as an inspiration for this project.
+This project is also licensed under the [Apache 2.0 License](http://www.apache.org/licenses/LICENSE-2.0). See LICENSE for more details.

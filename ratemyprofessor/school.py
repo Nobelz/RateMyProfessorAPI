@@ -23,6 +23,6 @@ class School:
         if school_names:
             school_name = str(school_names[0])
         else:
-            raise ValueError('Invalid school id!')
+            raise ValueError('Invalid school id or bad request.')
 
         return school_name

@@ -3,6 +3,7 @@
 
 ## Setup
 **Please note that this has only been tested on Python 3.9.1. If this doesn't work for older versions, open up an Issue.**
+**This project requires Python 3.6 or above. This WILL NOT WORK on Python 3.5 or lower.**
 
 Install the package using the following command:
 ```

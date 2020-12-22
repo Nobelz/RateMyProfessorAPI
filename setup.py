@@ -12,7 +12,7 @@ with open('requirements.txt') as f:
 
 setup(
     name='RateMyProfessorAPI',
-    version='1.1.1',
+    version='1.1.2',
     description='Python web scraper to get professor ratings from ratemyprofessor.com website.',
     long_description=long_description,
     long_description_content_type='text/markdown',
@@ -31,6 +31,7 @@ setup(
     ],
     packages=setuptools.find_packages(),
     python_requires='>=3.6',
+    include_package_data=True,
     install_requires=requirements,
     project_urls={
         'Issue Tracker': 'https://github.com/Nobelz/RateMyProfessorAPI/issues',

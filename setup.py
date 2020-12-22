@@ -12,7 +12,7 @@ with open('requirements.txt') as f:
 
 setup(
     name='RateMyProfessorAPI',
-    version='1.1.0',
+    version='1.1.1',
     description='Python web scraper to get professor ratings from ratemyprofessor.com website.',
     long_description=long_description,
     long_description_content_type='text/markdown',

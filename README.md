@@ -48,6 +48,9 @@ ratemyprofessor.get_professor_by_schools_and_name(school, "Professor Name")
 ```
 This will return a list of `Professor`s.
 
+## Documentation
+I am currently working on documentation but as of now there is no documentation yet. Sorry!
+
 ## Example
 ```python
 import ratemyprofessor

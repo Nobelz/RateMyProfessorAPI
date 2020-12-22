@@ -26,9 +26,6 @@ python -m pip uninstall RateMyProfessorAPI
 ```
 
 ## Usage
-As of version 1.0.0, there are limited ways to retrieve professor ratings. 
-Only ratings, difficulty ratings, and names can be displayed at this time.
-
 To retrieve a list of professors, you have to first specify the school:
 ```python
 ratemyprofessor.get_school_by_name("School Name here")
@@ -50,11 +47,6 @@ Alternatively, to search for multiple professors, use
 ratemyprofessor.get_professor_by_schools_and_name(school, "Professor Name") 
 ```
 This will return a list of `Professor`s.
-
-Each `Professor` object has a `rating`, `difficulty`, `id`, `name`, `department`, and `would_take_again`.
-Note that some of these will be `None`, like `would_take_again`.
-
-Each `School` object has a `id` and `name`.
 
 ## Example
 ```python

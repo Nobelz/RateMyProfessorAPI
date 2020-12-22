@@ -1,4 +1,0 @@
-{
-    "query":"query RatingsListQuery($count: Int! $id: ID! $courseFilter: String $cursor: String) {node(id: $id) {... on Teacher {ratings(first: $count, after: $cursor, courseFilter: $courseFilter) {edges {node {comment date class helpfulRating isForOnlineClass helpfulRating difficultyRating attendanceMandatory wouldTakeAgain grade isForOnlineClass isForCredit ratingTags comment thumbsUpTotal thumbsDownTotal}}}}}}",
-    "variables": {}
-}

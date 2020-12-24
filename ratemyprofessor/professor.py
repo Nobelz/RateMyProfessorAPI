@@ -5,6 +5,7 @@ import os
 import datetime
 
 
+from functools import total_ordering
 from .school import School
 
 current_path = os.path.dirname(__file__)
@@ -18,6 +19,7 @@ with open(os.path.join(current_path, "json/header.json"), 'r') as f:
     headers = json.load(f)
 
 
+@total_ordering
 class Professor:
     """Represents a professor."""
 
@@ -137,6 +139,15 @@ class Professor:
 
         return ratings
 
+    def __repr__(self):
+        return self.name
+
+    def __lt__(self, other):
+        return self.num_ratings < other.num_ratings
+
+    def __eq__(self, other):
+        return (self.name, self.department, self.school) == (other.name, other.department, other.school)
+
 
 class Course:
     """Represents a course."""
@@ -154,6 +165,7 @@ class Course:
         self.count = count
 
 
+@total_ordering
 class Rating:
     """Represents a rating."""
 
@@ -190,3 +202,6 @@ class Rating:
         self.online_class = online_class
         self.credit = credit
         self.attendance_mandatory = attendance_mandatory
+
+    def __lt__(self, other):
+        return self.date > other.date

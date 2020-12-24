@@ -26,3 +26,6 @@ class School:
             raise ValueError('Invalid school id or bad request.')
 
         return school_name
+
+    def __eq__(self, other):
+        return (self.name, self.id) == (other.name, other.id)

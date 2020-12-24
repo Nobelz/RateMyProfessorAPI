@@ -58,7 +58,7 @@ class Professor:
         else:
             self.would_take_again = professor_data["wouldTakeAgainPercent"]
         self.num_ratings = professor_data["numRatings"]
-        self.school: School = School(int(base64.b64decode(
+        self.school = School(int(base64.b64decode(
             professor_data["school"]["id"].encode('ascii')).decode('ascii')[7:]))
 
     def get_ratings(self, course_name=None):

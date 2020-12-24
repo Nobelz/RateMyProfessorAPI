@@ -49,15 +49,15 @@ class Professor:
             self.courses.append(Course(professor=self, count=course_data["courseCount"],
                                        name=course_data["courseName"]))
 
-        self.name: str = f'{professor_data["firstName"]} {professor_data["lastName"]}'
-        self.department: str = professor_data["department"]
-        self.difficulty: float = professor_data["avgDifficulty"]
-        self.rating: float = professor_data["avgRating"]
+        self.name = f'{professor_data["firstName"]} {professor_data["lastName"]}'
+        self.department = professor_data["department"]
+        self.difficulty = professor_data["avgDifficulty"]
+        self.rating = professor_data["avgRating"]
         if professor_data["wouldTakeAgainPercent"] == 0:
             self.would_take_again = None
         else:
-            self.would_take_again: float = professor_data["wouldTakeAgainPercent"]
-        self.num_ratings: int = professor_data["numRatings"]
+            self.would_take_again = professor_data["wouldTakeAgainPercent"]
+        self.num_ratings = professor_data["numRatings"]
         self.school: School = School(int(base64.b64decode(
             professor_data["school"]["id"].encode('ascii')).decode('ascii')[7:]))
 
@@ -170,7 +170,7 @@ class Rating:
     """Represents a rating."""
 
     def __init__(self,  rating: int, difficulty: int, comment: str, class_name: str, date: datetime,
-                 take_again=None, grade=None, thumbs_up: int=0, thumbs_down: int=0, online_class=None, credit=None,
+                 take_again=None, grade=None, thumbs_up: int = 0, thumbs_down: int = 0, online_class=None, credit=None,
                  attendance_mandatory=None):
         """
         Initializes a rating.

@@ -49,7 +49,7 @@ class Professor:
             self.courses.append(Course(professor=self, count=course_data["courseCount"],
                                        name=course_data["courseName"]))
 
-        self.name = f'{professor_data["firstName"]} {professor_data["lastName"]}'
+        self.name = professor_data["firstName"] + ' ' + professor_data["lastName"]
         self.department = professor_data["department"]
         self.difficulty = professor_data["avgDifficulty"]
         self.rating = professor_data["avgRating"]

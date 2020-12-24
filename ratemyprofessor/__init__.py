@@ -49,7 +49,7 @@ def get_schools_by_name(school_name: str):
     :return: List of schools that match the school name. If no schools are found, this will return an empty list.
     """
     school_name.replace(' ', '+')
-    url = f"https://www.ratemyprofessors.com/search.jsp?queryoption=HEADER&queryBy=schoolName&query={school_name}"
+    url = "https://www.ratemyprofessors.com/search.jsp?queryoption=HEADER&queryBy=schoolName&query=%s" % school_name
     page = requests.get(url)
     data = re.findall(r'/campusRatings\.jsp\?sid=(\d+)', page.text)
     school_list = []
@@ -100,9 +100,8 @@ def get_professors_by_school_and_name(college: School, professor_name: str):
              this will return an empty list.
     """
     professor_name.replace(' ', '+')
-    url = f"https://www.ratemyprofessors.com/search.jsp?queryoption=HEADER&queryBy=teacherName" \
-          f"&schoolName={college.name}" \
-          f"&schoolID={college.id}&query={professor_name}"
+    url = "https://www.ratemyprofessors.com/search.jsp?queryoption=HEADER&queryBy=teacherName" \
+          "&schoolName=%s&schoolID=%s&query=%s" % (college.name, college.id, professor_name)
     page = requests.get(url)
     data = re.findall(r'/ShowRatings\.jsp\?tid=(\d+)', page.text)
     professor_list = []

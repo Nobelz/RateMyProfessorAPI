@@ -34,8 +34,8 @@ class Professor:
         self._get_rating_info(professor_id)
 
     def _get_rating_info(self, professor_id: int):
-        headers["Referer"] = f"https://www.ratemyprofessors.com/ShowRatings.jsp?tid={professor_id}"
-        professor_query["variables"]["id"] = base64.b64encode(f"Teacher-{professor_id}".encode('ascii')).decode('ascii')
+        headers["Referer"] = "https://www.ratemyprofessors.com/ShowRatings.jsp?tid=%s" % professor_id
+        professor_query["variables"]["id"] = base64.b64encode(("Teacher-%s" % professor_id).encode('ascii')).decode('ascii')
         data = requests.post(url="https://www.ratemyprofessors.com/graphql", json=professor_query, headers=headers)
 
         if data is None or json.loads(data.text)["data"]["node"] is None:
@@ -75,8 +75,8 @@ class Professor:
         if self.num_ratings == 0:
             return []
 
-        headers["Referer"] = f"https://www.ratemyprofessors.com/ShowRatings.jsp?tid={self.id}"
-        ratings_query["variables"]["id"] = base64.b64encode(f"Teacher-{self.id}".encode('ascii')).decode('ascii')
+        headers["Referer"] = "https://www.ratemyprofessors.com/ShowRatings.jsp?tid=%s" % self.id
+        ratings_query["variables"]["id"] = base64.b64encode(("Teacher-%s" % self.id).encode('ascii')).decode('ascii')
         ratings_query["variables"]["count"] = self.num_ratings
 
         if course_name is not None:

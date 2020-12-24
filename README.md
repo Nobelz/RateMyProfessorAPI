@@ -1,9 +1,13 @@
+
+[![Downloads](https://pepy.tech/badge/ratemyprofessorapi)](https://pepy.tech/project/ratemyprofessorapi)
+[![Supported Versions](https://img.shields.io/pypi/pyversions/ratemyprofessorapi.svg)](https://pypi.org/project/ratemyprofessorapi)
+
 # RateMyProfessorAPI
 
 
 ## Setup
 **Please note that this has only been tested on Python 3.9.1. If this doesn't work for older versions, open up an Issue.**
-**This project requires Python 3.6 or above. This WILL NOT WORK on Python 3.5 or lower.**
+**This project requires Python 3.5 or above. This WILL NOT WORK on Python 3.4 or lower.**
 
 Install the package using the following command:
 ```
@@ -29,12 +33,12 @@ python -m pip uninstall RateMyProfessorAPI
 ## Usage
 To retrieve a list of professors, you have to first specify the school:
 ```python
-ratemyprofessor.get_school_by_name("School Name here")
+ratemyprofessor.get_school_by_name("School Name")
 ```
 This will return `None` if no school is found corresponding with that name. 
 Alternatively, to search for multiple schools, use
 ```python
-ratemyprofessor.get_schools_by_name("School Name here")
+ratemyprofessor.get_schools_by_name("School Name")
 ```
 This will return a list of `School`s.
 

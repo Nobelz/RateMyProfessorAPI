@@ -192,7 +192,7 @@ class Rating:
         """
         self.rating = rating
         self.difficulty = difficulty
-        self.comment = BeautifulSoup(comment, "lxml").text)
+        self.comment = BeautifulSoup(comment, "lxml").text
         self.class_name = class_name
         self.date = date
         self.take_again = take_again

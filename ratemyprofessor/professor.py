@@ -3,7 +3,7 @@ import json
 import base64
 import os
 import datetime
-
+from bs4 import BeautifulSoup
 
 from functools import total_ordering
 from .school import School
@@ -192,7 +192,7 @@ class Rating:
         """
         self.rating = rating
         self.difficulty = difficulty
-        self.comment = comment
+        self.comment = BeautifulSoup(comment, "lxml").text)
         self.class_name = class_name
         self.date = date
         self.take_again = take_again

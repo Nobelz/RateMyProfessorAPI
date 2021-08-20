@@ -4,12 +4,13 @@ ratemyprofessor
 RateMyProfessor API
 An extremely basic web scraper for the RateMyProfessor website.
 
-:copyright: (c) 2020 Nobelz
+:copyright: (c) 2021 Nobelz
 :license: Apache 2.0, see LICENSE for more details.
 """
 import requests
 import re
 import json
+import base64
 import os
 
 from .professor import Professor
@@ -49,7 +50,7 @@ def get_schools_by_name(school_name: str):
     :return: List of schools that match the school name. If no schools are found, this will return an empty list.
     """
     school_name.replace(' ', '+')
-    url = "https://www.ratemyprofessors.com/search.jsp?queryoption=HEADER&queryBy=schoolName&query=%s" % school_name
+    url = "https://www.ratemyprofessors.com/search/schools?query=%s" % school_name
     page = requests.get(url)
     data = re.findall(r'/campusRatings\.jsp\?sid=(\d+)', page.text)
     school_list = []
@@ -99,9 +100,10 @@ def get_professors_by_school_and_name(college: School, professor_name: str):
     :return: List of professors that match the school and name. If no professors are found,
              this will return an empty list.
     """
-    professor_name.replace(' ', '+')
-    url = "https://www.ratemyprofessors.com/search.jsp?queryoption=HEADER&queryBy=teacherName" \
-          "&schoolName=%s&schoolID=%s&query=%s" % (college.name, college.id, professor_name)
+    # professor_name.replace(' ', '+')
+    url = "https://www.ratemyprofessors.com" \
+          "/search/teachers?query=%s&sid=%s" % (professor_name, base64.b64encode(("School-%s" % college.id)
+                                                                                 .encode('ascii')).decode('ascii'))
     page = requests.get(url)
     data = re.findall(r'/ShowRatings\.jsp\?tid=(\d+)', page.text)
     professor_list = []

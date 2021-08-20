@@ -3,6 +3,7 @@ import json
 import base64
 import os
 import datetime
+import lxml
 from bs4 import BeautifulSoup
 
 from functools import total_ordering

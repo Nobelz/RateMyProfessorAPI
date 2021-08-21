@@ -3,7 +3,6 @@ import json
 import base64
 import os
 import datetime
-import lxml
 from bs4 import BeautifulSoup
 
 from functools import total_ordering
@@ -36,7 +35,8 @@ class Professor:
 
     def _get_rating_info(self, professor_id: int):
         headers["Referer"] = "https://www.ratemyprofessors.com/ShowRatings.jsp?tid=%s" % professor_id
-        professor_query["variables"]["id"] = base64.b64encode(("Teacher-%s" % professor_id).encode('ascii')).decode('ascii')
+        professor_query["variables"]["id"] = base64.b64encode(("Teacher-%s" % professor_id)
+                                                              .encode('ascii')).decode('ascii')
         data = requests.post(url="https://www.ratemyprofessors.com/graphql", json=professor_query, headers=headers)
 
         if data is None or json.loads(data.text)["data"]["node"] is None:

@@ -71,7 +71,7 @@ class Test(unittest.TestCase):
             lowest_ratings_professor = professor
 
         # Test if professors cannot be found
-        self.assertEqual([], ratemyprofessor.get_professors_by_school_and_name(School(186), "Bugs Bunny"))
+        self.assertEqual([], ratemyprofessor.get_professors_by_school_and_name(School(186), "Peter Rabbit"))
 
     def test_ratings(self):
         connamacher = Professor(1658282)

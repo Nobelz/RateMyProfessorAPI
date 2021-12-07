@@ -13,8 +13,12 @@ import json
 import base64
 import os
 
-from .professor import Professor
-from .school import School
+from professor import Professor
+from school import School
+
+#@Ozeitis additions to 
+import difflib
+from itertools import combinations
 
 
 with open(os.path.join(os.path.dirname(__file__), "json/header.json"), 'r') as f:
@@ -107,11 +111,47 @@ def get_professors_by_school_and_name(college: School, professor_name: str):
     page = requests.get(url)
     data = re.findall(r'"legacyId":(\d+)', page.text)
     professor_list = []
-
     for professor_data in data:
         try:
             professor_list.append(Professor(int(professor_data)))
         except ValueError:
             pass
-
+    
     return professor_list
+
+def deep_get_professor_by_school_and_name(college: School, professor_name: str):
+    """
+    Same as get_professor_by_school_and_name, but splits the name, creating a list of possible names.
+    Then it searches for the professor with the highest similarity rating when compared to the passed professor name.
+
+    This only returns 1 professor, so make sure that the name is specific.
+    This returns the professor with the most ratings.
+    For instance, searching "Smith" using the School of Case Western Reserve University will return 5 results,
+    but only one result will be returned.
+
+    :param college: The professor's school.
+    :param professor_name: The professor's name.
+    :return: The professor that matches the school and name. If no professors are found, this will return None.
+    """
+    #takes a professor name and splits it into a list of possible names
+    #then it searches for the professor with the highest similary rating when compared to the passed professor name.
+    all_names = []
+    split_instr=re.split('-| ', professor_name)
+    first = split_instr[0]
+    rest = split_instr[1:]
+    for i in range(len(rest) + 1):
+        for r in combinations(rest, i):
+            all_names.append((first + ' ' + ' '.join(r)).strip())
+    
+    highest_comparison = 0
+    current_professor = None
+    for combination_name in all_names:
+        professors = get_professors_by_school_and_name(college, professor_name)
+        for professor in professors:
+            if professor.name != None:
+                similarity = difflib.SequenceMatcher(None, professor.name, combination_name).ratio()
+                if similarity > highest_comparison:
+                    highest_comparison = similarity
+                    current_professor = professor
+
+    return current_professor

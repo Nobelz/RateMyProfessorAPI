@@ -16,7 +16,7 @@ import os
 from professor import Professor
 from school import School
 
-#@Ozeitis additions to 
+#@Ozeitis imports for deep_get_professor_by_school_and_name
 import difflib
 from itertools import combinations
 

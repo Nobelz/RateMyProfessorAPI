@@ -105,7 +105,7 @@ def get_professors_by_school_and_name(college: School, professor_name: str):
           "/search/teachers?query=%s&sid=%s" % (professor_name, base64.b64encode(("School-%s" % college.id)
                                                                                  .encode('ascii')).decode('ascii'))
     page = requests.get(url)
-    data = re.findall(r'/ShowRatings\.jsp\?tid=(\d+)', page.text)
+    data = re.findall(r'"legacyId":(\d+)', page.text)
     professor_list = []
 
     for professor_data in data:

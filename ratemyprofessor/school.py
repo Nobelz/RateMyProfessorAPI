@@ -1,5 +1,6 @@
 import re
 import requests
+from bs4 import BeautifulSoup
 
 
 class School:
@@ -18,8 +19,7 @@ class School:
     def _get_name(self):
         url = "https://www.ratemyprofessors.com/campusRatings.jsp?sid=%s" % self.id
         page = requests.get(url)
-        school_names = re.findall(r"schoolName: '(.*?)'", page.text)
-
+        school_names = re.findall(fr'"legacyId":{self.id},"name":"(.*?)"', page.text)
         if school_names:
             school_name = str(school_names[0])
         else:

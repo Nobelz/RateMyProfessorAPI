@@ -22,7 +22,7 @@ class Test(unittest.TestCase):
 
         # Test invalid school id
         try:
-            School(12345)
+            School(-1)
             self.fail()
         except ValueError:
             pass

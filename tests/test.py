@@ -22,10 +22,17 @@ class Test(unittest.TestCase):
 
         # Test invalid school id
         try:
-            School(-1)
-            self.fail()
+            School(-1)     # School id cannot be negative
+            self.fail()    # Fail if no exception is raised
         except ValueError:
-            pass
+            pass           # Pass if exception is raised
+
+        # Test missing school id
+        try:
+            School()       # School id is required
+            self.fail()    # Fail if no exception is raised
+        except TypeError:
+            pass           # Pass if exception is raised
 
         # Test if schools can be found
         self.assertIsNotNone(ratemyprofessor.get_schools_by_name("University"))
@@ -34,13 +41,20 @@ class Test(unittest.TestCase):
         self.assertEqual([], ratemyprofessor.get_schools_by_name("Fake University That Does Not Exist"))
 
         # Test if all the schools can be found
-        self.assertEqual(6, len(ratemyprofessor.get_schools_by_name("Ohio State")))
+        osu_school_list = ratemyprofessor.get_schools_by_name("Ohio State")
+        self.assertEqual(6, len(osu_school_list))
+
+        # Test if all the schools are Ohio State schools (contains "Ohio State" in the name)
+        for school in osu_school_list:
+            self.assertTrue("Ohio State" in school.name)
 
     def test_professor(self):
+        cwru = School(186)
+
         connamacher = Professor(1658282)
 
         # Test if professor can be found
-        self.assertEqual(connamacher, ratemyprofessor.get_professor_by_school_and_name(School(186), "Connamacher"))
+        self.assertEqual(connamacher, ratemyprofessor.get_professor_by_school_and_name(cwru, "Connamacher"))
 
         # Test Professor constructor
         self.assertEqual("Harold Connamacher", connamacher.name)
@@ -55,6 +69,13 @@ class Test(unittest.TestCase):
             Professor(1)
             self.fail()
         except ValueError:
+            pass
+
+        # Test missing professor id
+        try:
+            Professor()
+            self.fail()
+        except TypeError:
             pass
 
         # Test if professors can be found

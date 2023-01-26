@@ -1,7 +1,6 @@
 import unittest
 import ratemyprofessor
 
-
 from ratemyprofessor import School
 from ratemyprofessor import Professor
 

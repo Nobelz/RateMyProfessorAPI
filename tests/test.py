@@ -5,17 +5,19 @@ import ratemyprofessor
 from ratemyprofessor import School
 from ratemyprofessor import Professor
 
+# Constant SID (School IDs)
+case_western_reserve_sid = 186
 
 class Test(unittest.TestCase):
     def test_school(self):
-        cwru = School(186)
+        cwru = School(case_western_reserve_sid)
 
         # Test if school can be found
         self.assertEqual(cwru, ratemyprofessor.get_school_by_name("Case Western Reserve University"))
 
         # Test School constructor
         self.assertEqual(cwru.name, "Case Western Reserve University")
-        self.assertEqual(cwru.id, 186)
+        self.assertEqual(cwru.id, case_western_reserve_sid)
 
         # Test if school cannot be found
         self.assertIsNone(ratemyprofessor.get_school_by_name("Case Eastern Reserve University"))
@@ -49,9 +51,10 @@ class Test(unittest.TestCase):
             self.assertTrue("Ohio State" in school.name)
 
     def test_professor(self):
-        cwru = School(186)
+        cwru = School(case_western_reserve_sid)
 
-        connamacher = Professor(1658282)
+        valid_prof_id = 1658282
+        connamacher = Professor(valid_prof_id)
 
         # Test if professor can be found
         self.assertEqual(connamacher, ratemyprofessor.get_professor_by_school_and_name(cwru, "Connamacher"))
@@ -59,14 +62,14 @@ class Test(unittest.TestCase):
         # Test Professor constructor
         self.assertEqual("Harold Connamacher", connamacher.name)
         self.assertEqual("Computer Science", connamacher.department)
-        self.assertEqual(School(186), connamacher.school)
+        self.assertEqual(School(case_western_reserve_sid), connamacher.school)
 
         # Test if professor cannot be found
-        self.assertIsNone(ratemyprofessor.get_professor_by_school_and_name(School(186), "Captain Obvious"))
+        self.assertIsNone(ratemyprofessor.get_professor_by_school_and_name(School(case_western_reserve_sid), "Captain Obvious"))
 
         # Test invalid professor id
         try:
-            Professor(1)
+            Professor(-1)
             self.fail()
         except ValueError:
             pass
@@ -79,12 +82,12 @@ class Test(unittest.TestCase):
             pass
 
         # Test if professors can be found
-        professors = ratemyprofessor.get_professors_by_school_and_name(School(186), "Smith")
+        valid_prof_name = "Smith"
+        professors = ratemyprofessor.get_professors_by_school_and_name(cwru, valid_prof_name)
         self.assertIsNotNone(professors)
 
         # Test if professors are being sorted by number of ratings
         professors.sort()
-
         lowest_ratings_professor = professors[0]
         for professor in professors:
             if professor < lowest_ratings_professor:
@@ -92,22 +95,23 @@ class Test(unittest.TestCase):
             lowest_ratings_professor = professor
 
         # Test if professors cannot be found
-        self.assertEqual([], ratemyprofessor.get_professors_by_school_and_name(School(186), "Peter Rabbit"))
+        invalid_prof_name = "Peter Rabbit"
+        self.assertEqual([], ratemyprofessor.get_professors_by_school_and_name(cwru, invalid_prof_name))
 
     def test_ratings(self):
-        connamacher = Professor(1658282)
+        valid_prof_id = 1658282
+        connamacher = Professor(valid_prof_id)
 
         ratings = connamacher.get_ratings()
-        ratings.sort()
 
+        # Test if professor's ratings are being sorted most recent to least recent
+        ratings.sort()
         most_recent_rating = ratings[0]
-        print(most_recent_rating.date)
         for rating in ratings:
             # Tests to make sure that the ratings are sorted from newest to oldest
             if rating < most_recent_rating:
                 self.fail()
             most_recent_rating = rating
-
 
 if __name__ == '__main__':
     unittest.main()

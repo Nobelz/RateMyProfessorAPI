@@ -52,7 +52,7 @@ def get_schools_by_name(school_name: str):
     school_name.replace(' ', '+')
     url = "https://www.ratemyprofessors.com/search/schools?query=%s" % school_name
     page = requests.get(url)
-    data = re.findall(r'/school\?sid=(\d+)', page.text)
+    data = re.findall(r'"legacyId":(\d+)', page.text)
     school_list = []
 
     for school_data in data:

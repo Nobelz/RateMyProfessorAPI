@@ -1,0 +1,6 @@
+{
+  "query": "query NewSearchTeachersQuery($query: TeacherSearchQuery!) {newSearch {teachers(query: $query) {didFallback edges {cursor node {id legacyId firstName lastName school {name id}department}}}}}",
+  "variables": {
+    "query": {}
+  }
+}

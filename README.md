@@ -49,7 +49,7 @@ ratemyprofessor.get_professor_by_school_and_name(school, "Professor Name")
 where school refers to a `School` object.
 Alternatively, to search for multiple professors, use
 ```python
-ratemyprofessor.get_professor_by_schools_and_name(school, "Professor Name") 
+ratemyprofessor.get_professors_by_school_and_name(school, "Professor Name") 
 ```
 This will return a list of `Professor`s.
 

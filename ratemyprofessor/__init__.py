@@ -94,7 +94,7 @@ def get_first_professor_by_school_and_name(college: School, professor_name: str)
     This returns the first professor listed on Rate My Professor, regardless of rating.
     For instance, searching "Smith" using the School of Case Western Reserve University will return 5 results,
     but only the top result will be returned.
-    This method is faster than `get_professor_by_school_and_name`, but may provide worse/better results depending on your usecase.
+    This method is faster than `get_professor_by_school_and_name`, but may provide worse/better results depending on your use case.
 
     :param college: The professor's school.
     :param professor_name: The professor's name.
